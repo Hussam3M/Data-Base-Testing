@@ -61,7 +61,6 @@ driver.findElement(By.id("customer[first_name]")).sendKeys(customerName);
 
 }
 
-
 @Test(priority = 4)
 public void addLastName() throws SQLException {
 	
@@ -96,5 +95,11 @@ driver.findElement(By.id("customer[email]")).sendKeys(CustomerEmail);
 
 }
 
-
+@Test(priority = 6)
+public void deleteCustomer() throws SQLException {
+	
+	String query = "DELETE FROM customers WHERE customerNumber = 113;";
+	int rowDeleted = stmt.executeUpdate(query);
+	System.out.println(rowDeleted);
+}
 }
