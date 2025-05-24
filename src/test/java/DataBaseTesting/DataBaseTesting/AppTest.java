@@ -9,6 +9,7 @@ import java.sql.Statement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -101,4 +102,11 @@ public void deleteCustomer() throws SQLException {
 	int rowDeleted = stmt.executeUpdate(query);
 	System.out.println(rowDeleted);
 }
+
+@AfterTest
+public void After_Test(){
+	
+	driver.quit();
+	}
+
 }

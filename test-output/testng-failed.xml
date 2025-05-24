@@ -5,8 +5,14 @@
     <classes>
       <class name="DataBaseTesting.DataBaseTesting.AppTest">
         <methods>
+          <include name="deleteCustomer"/>
+          <include name="After_Test"/>
           <include name="InsertIntoDatabase"/>
+          <include name="updateDataBase"/>
           <include name="setup"/>
+          <include name="addLastName"/>
+          <include name="addCustomerEmail"/>
+          <include name="ReadDataBase"/>
         </methods>
       </class> <!-- DataBaseTesting.DataBaseTesting.AppTest -->
     </classes>
