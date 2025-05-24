@@ -12,13 +12,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class AppTest {
+public class AppTest extends TestData {
 
 	Connection con;
 	Statement stmt ;
 	ResultSet rs;
 	WebDriver driver =new ChromeDriver();
-	String customerName;
 	String customerLastName;
 	String CustomerEmail;
     @BeforeTest
@@ -30,7 +29,11 @@ public class AppTest {
 
 @Test (priority = 1)
 public void InsertIntoDatabase() throws SQLException {
-	String query="INSERT INTO customers (customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, city, country, salesRepEmployeeNumber, creditLimit) VALUES (113, 'New Corp', 'Smith', 'John', '123456789', '123 Main St', 'Los Angeles', 'USA', 1370, 50000.00);";
+	String query = "INSERT INTO customers (customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, city, country, salesRepEmployeeNumber, creditLimit) VALUES (" +
+	        TestData.CUSTOMER_NUMBER + ", '" + TestData.CustomerName + "', '" + TestData.CONTACT_LAST_NAME + "', '" +
+	        TestData.CONTACT_FIRST_NAME + "', '" + TestData.PHONE + "', '" + TestData.ADDRESS + "', '" + 
+	        TestData.CITY + "', '" + TestData.COUNTRY + "', " + TestData.SALES_REP_EMPLOYEE_NUMBER + ", " + 
+	        TestData.CREDIT_LIMIT + ");";
 stmt = con.createStatement();
 int rowEfected = stmt.executeUpdate(query);
 System.out.println(rowEfected);
@@ -47,20 +50,16 @@ public void updateDataBase() throws SQLException {
 
 @Test(priority = 3)
 public void ReadDataBase() throws SQLException {
-	
-	String query="SELECT * FROM customers WHERE customerNumber = 103;";
-	stmt = con.createStatement();
-	rs = stmt.executeQuery(query);
+    String query = "SELECT * FROM customers WHERE customerNumber = " + TestData.CUSTOMER_NUMBER_TO_READ + ";";
+    stmt = con.createStatement();
+    rs = stmt.executeQuery(query);
 
-while (	rs.next()) {
-	customerName = rs.getNString("contactFirstName");
-	System.out.println(customerName);
-			
+    while (rs.next()) {
+        TestData.CustomerName = rs.getString("contactFirstName");
+        System.out.println(TestData.CustomerName);
+    }
+    driver.findElement(By.id("customer[first_name]")).sendKeys(TestData.CustomerName);
 }
-driver.findElement(By.id("customer[first_name]")).sendKeys(customerName);
-
-}
-
 @Test(priority = 4)
 public void addLastName() throws SQLException {
 	
@@ -85,9 +84,9 @@ public void addCustomerEmail() throws SQLException {
 	rs = stmt.executeQuery(query);
 
 while (	rs.next()) {
-	customerName = rs.getNString("contactFirstName");
+	CustomerName = rs.getNString("contactFirstName");
 	customerLastName = rs.getNString("contactLastName");
- CustomerEmail = customerName +customerLastName+"@gmail.com"; 
+ CustomerEmail = CustomerName +customerLastName+"@gmail.com"; 
 	System.out.println(CustomerEmail);
 			
 }
