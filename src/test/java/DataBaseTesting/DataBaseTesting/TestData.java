@@ -2,7 +2,7 @@ package DataBaseTesting.DataBaseTesting;
 
 public class TestData {
     public static final int CUSTOMER_NUMBER = 113;
-    public static String CustomerName = "";  // غير ثابت عشان تتغير قيمته وقت التشغيل
+    public static String CustomerName = "";  
     public static final String CONTACT_LAST_NAME = "Smith";
     public static final String CONTACT_FIRST_NAME = "John";
     public static final String PHONE = "123456789";
